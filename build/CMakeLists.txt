@@ -1,0 +1,33 @@
+CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
+
+PROJECT(p2pserver)
+set(PROJECT_VERSION_MAJOR 1)
+set(PROJECT_VERSION_MINOR 0)
+set(PROJECT_VERSION_PATCH 00)
+set(PROJECT_VERSION_TWEAK 007)
+
+SET(CMAKE_C_COMPILER g++)
+ADD_DEFINITIONS("-std=c++11")
+ADD_DEFINITIONS(-Wall)
+if(Flag)
+	message( STATUS "==============================message to Flag" )
+	ADD_DEFINITIONS(-g)
+	ADD_DEFINITIONS(-D_DEBUGMODE=1)
+else(Flag)
+	ADD_DEFINITIONS(-O1)
+endif()
+#ADD_DEFINITIONS("$(mysql_config --libs)")
+INCLUDE_DIRECTORIES(../inc)
+#INCLUDE_DIRECTORIES(/usr/local/include/)
+AUX_SOURCE_DIRECTORY(../src DIR_SRCS )
+
+SET(LIBRARIES  liblog4cplus.a; libCritical.a; libDB.a; libmysqlclient.a)
+link_libraries( m dl pthread )
+LINK_DIRECTORIES(../lib)
+#LINK_DIRECTORIES(../lib/log4cplus)
+#LINK_DIRECTORIES(../lib/mysql)
+
+ADD_EXECUTABLE(./upnpserver ${DIR_SRCS})
+TARGET_LINK_LIBRARIES(./upnpserver ${LIBRARIES})
+
+ADD_EXECUTABLE(../test/test ../test/test.cpp)

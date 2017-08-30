@@ -1,0 +1,7 @@
+POST /Register HTTP/1.1
+Host: 192.168.139.202:80/test
+User-Agent:  UPNP NAT version 1.0
+Content-Type: text/xml
+Content-Length:600 
+Connection:Keep-Alive
+

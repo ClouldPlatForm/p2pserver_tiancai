@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<P2Pinfo version="1.0" xmlns="urn:skylight">
+<SN>abc1</SN>
+<NAT>
+     <uPNP>
+           <Mapping name="HTTP">60000</Mapping>
+           <Mapping name="RTSP">60001</Mapping>
+           <Mapping name="RTP">60002</Mapping>
+           <MappedIP>22.98.103.88</MappedIP>
+           <private>
+                <Mapping name="HTTP">80</Mapping>
+                <Mapping name="RTSP">554</Mapping>
+                <Mapping name="RTP">556</Mapping>
+                <MappedIP>192.168.0.232</MappedIP>
+           </private>
+     </uPNP>
+</NAT>
+<random>6</random>
+</P2Pinfo>

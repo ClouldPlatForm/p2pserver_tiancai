@@ -1,0 +1,40 @@
+#!/bin/bash
+if [ "$1" = "-d" ];then
+	echo ""
+	echo "----------------------------cmake debug----------------------------"
+	echo ""
+	rm -f CMakeCache.txt
+	cmake -D Flag=ON .
+	make
+	rm -f CMakeCache.txt
+else
+	echo ""
+	echo "----------------------------cmake release----------------------------"
+	echo ""
+	rm -f CMakeCache.txt
+	cmake .
+	echo ""
+	echo "----------------------------make----------------------------"
+	echo ""
+	make
+
+	echo "----clean----"
+	rm -f CMakeCache.txt
+	rm -fr CMakeFiles
+	rm -fr test
+	rm -f cmake_install.cmake
+	rm -fr $(./upnpserver -v)
+	mkdir -p server $(./upnpserver -v) log config
+	touch start.sh 
+	touch stop.sh
+	echo "chmod +x ./upnpserver & ./upnpserver">start.sh
+	echo "killall -9 upnpserver">stop.sh
+
+	cp -f start.sh stop.sh upnpserver server/
+	cp -f ../config/config.xml config/
+	cp -fr config/ log server $(./upnpserver -v)
+	tar -zcvf $(./upnpserver -v).tar.gz $(./upnpserver -v)
+	rm -fr server $(./upnpserver -v) log config
+fi
+
+
